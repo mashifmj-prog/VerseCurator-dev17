@@ -11,7 +11,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
     
     <style>
-        /* All previous CSS remains intact */
+        /* CSS Variables for Theming */
         :root {
             --primary-color: #4a6fa5;
             --secondary-color: #6b8cbc;
@@ -47,7 +47,91 @@
             --text-light: #a0a0a0;
         }
 
-        /* New Color Variables */
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
         .btn-offline {
             background-color: var(--offline-color);
             color: white;
@@ -56,6 +140,252 @@
         .btn-performance {
             background-color: var(--performance-color);
             color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar, .right-sidebar {
+                display: none;
+            }
+        }
+
+        /* Sidebar Styles */
+        .sidebar, .right-sidebar {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .user-info-card {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(74, 111, 165, 0.05);
+            border-radius: var(--border-radius);
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+
+        .username {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .user-stats {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .user-stats div {
+            margin-bottom: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Feed Styles */
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Card Styles */
+        .ai-recommendation-card, .post-card {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .ai-recommendation-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--ai-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .post-header .user-avatar {
+            width: 40px;
+            height: 40px;
+            margin: 0;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .username {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .post-time {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .post-content h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .ml-prediction {
+            background-color: rgba(138, 43, 226, 0.1);
+            padding: 10px;
+            border-radius: var(--border-radius);
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* View Sections */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        .verse-section {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .verse-section h2 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .verse-section p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        /* Analytics Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .analytics-card {
+            background-color: rgba(74, 111, 165, 0.05);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .analytics-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .analytics-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Intelligence Panel */
+        .intelligence-panel {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .resource-card {
+            background-color: rgba(74, 111, 165, 0.05);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
 
         /* PWA Installation Prompt */
@@ -254,6 +584,94 @@
             border-color: var(--performance-color);
         }
 
+        /* Form Controls */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            background-color: var(--card-color);
+            color: var(--text-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            color: white;
+            z-index: 1004;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: var(--performance-color);
+        }
+
+        .notification.info {
+            background-color: var(--primary-color);
+        }
+
+        .notification.error {
+            background-color: var(--accent-color);
+        }
+
         /* Loading Optimizations */
         .skeleton-loading {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
@@ -294,6 +712,17 @@
                 display: none;
             }
             
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
             /* Enhanced touch targets */
             .btn, .action-btn {
                 min-height: 44px;
@@ -323,6 +752,12 @@
             /* Adjust main content for mobile nav */
             .main-content {
                 margin-bottom: 70px;
+            }
+            
+            .pwa-install-prompt {
+                left: 20px;
+                right: 20px;
+                max-width: none;
             }
         }
 
@@ -358,10 +793,6 @@
                 border: 2px solid;
             }
         }
-
-        /* All previous CSS styles remain below */
-        /* ... (previous CSS code) ... */
-        
     </style>
 </head>
 <body>
@@ -379,6 +810,9 @@
         <button class="btn btn-offline" id="installPwaBtn">Install</button>
         <button class="btn btn-outline" id="dismissPwaBtn">Later</button>
     </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
 
     <div class="container">
         <header>
@@ -432,11 +866,11 @@
 
                 <main class="feed">
                     <!-- PWA Features Card -->
-                    <div class="ai-recommendation-card" style="background: linear-gradient(135deg, var(--offline-color), var(--primary-color));">
+                    <div class="ai-recommendation-card" style="background: linear-gradient(135deg, var(--offline-color), var(--primary-color)); color: white;">
                         <div class="ai-badge">PWA Ready</div>
                         <h3>📱 Progressive Web App</h3>
                         <p>Install VerseCurator as a native app with full offline functionality and push notifications</p>
-                        <div class="ml-prediction">
+                        <div class="ml-prediction" style="background: rgba(255,255,255,0.2);">
                             <strong>Benefits:</strong> 3x faster loading, offline access, push notifications
                         </div>
                         <button class="btn btn-outline" id="installAppBtn" style="background: white; color: var(--offline-color); margin-top: 10px;">
@@ -649,51 +1083,66 @@
                             <div class="metric-label">Load Time</div>
                         </div>
                         <div class="metric-card">
-                            <div class="metric-value" id="perfCache">94%</div>
-                            <div class="metric-label">Cache Efficiency</div>
+                            <div class="metric-value" id="perfCacheHit">94%</div>
+                            <div class="metric-label">Cache Hit Rate</div>
                         </div>
                         <div class="metric-card">
                             <div class="metric-value" id="perfMemory">42MB</div>
                             <div class="metric-label">Memory Usage</div>
                         </div>
                         <div class="metric-card">
-                            <div class="metric-value" id="perfCompression">67%</div>
-                            <div class="metric-label">Data Compression</div>
+                            <div class="metric-value" id="perfDataSaved">67%</div>
+                            <div class="metric-label">Data Saved</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="cache-management">
-                    <h3>🗃️ Cache Management</h3>
+                    <h3>💾 Cache Management</h3>
                     <div class="cache-stats">
                         <div class="cache-stat">
                             <div style="font-size: 1.2rem; font-weight: bold;">87 MB</div>
-                            <div style="font-size: 0.8rem; color: var(--text-light);">Scripture Cache</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Total Cache</div>
                         </div>
                         <div class="cache-stat">
-                            <div style="font-size: 1.2rem; font-weight: bold;">45 MB</div>
-                            <div style="font-size: 0.8rem; color: var(--text-light);">Media Cache</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">124 MB</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Offline Content</div>
                         </div>
                         <div class="cache-stat">
-                            <div style="font-size: 1.2rem; font-weight: bold;">23 MB</div>
-                            <div style="font-size: 0.8rem; color: var(--text-light);">User Data</div>
+                            <div style="font-size: 1.2rem; font-weight: bold;">32%</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Storage Used</div>
                         </div>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px;">
-                        <button class="btn btn-performance" id="clearScriptureCache">Clear Scripture</button>
-                        <button class="btn btn-performance" id="clearMediaCache">Clear Media</button>
-                        <button class="btn btn-outline" id="clearAllCache">Clear All</button>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                        <button class="btn btn-performance" id="clearCacheBtn2">Clear Cache</button>
+                        <button class="btn btn-outline" id="optimizeCacheBtn">Optimize Cache</button>
                     </div>
                 </div>
 
                 <div class="intelligence-panel">
-                    <h3>🚀 Optimization Tools</h3>
-                    <div class="action-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-                        <button class="btn btn-outline" id="compressImages">Compress Images</button>
-                        <button class="btn btn-outline" id="optimizeDatabase">Optimize Database</button>
-                        <button class="btn btn-outline" id="preloadContent">Preload Content</button>
-                        <button class="btn btn-outline" id="runBenchmarks">Run Benchmarks</button>
+                    <h3>🚀 Performance Optimizations</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card" data-optimize="compression">
+                            <div class="resource-icon">🗜️</div>
+                            <div>Data Compression</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Active</div>
+                        </div>
+                        <div class="resource-card" data-optimize="lazy">
+                            <div class="resource-icon">🖼️</div>
+                            <div>Lazy Loading</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Active</div>
+                        </div>
+                        <div class="resource-card" data-optimize="caching">
+                            <div class="resource-icon">💾</div>
+                            <div>Smart Caching</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Active</div>
+                        </div>
+                        <div class="resource-card" data-optimize="prefetch">
+                            <div class="resource-icon">🔮</div>
+                            <div>Prefetching</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Active</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -703,107 +1152,323 @@
         <section id="export-view" class="view-section">
             <div class="verse-section">
                 <h2>📤 Export & Import</h2>
-                <p>Backup, share, and migrate your data</p>
+                <p>Export your data in multiple formats or import from other platforms</p>
                 
                 <div class="export-import-panel">
-                    <h3>📄 Export Options</h3>
+                    <h3>📥 Export Data</h3>
+                    <p>Choose format and content to export</p>
+                    
                     <div class="format-options">
-                        <div class="format-option active" data-format="json">
-                            <div style="font-weight: bold;">JSON</div>
-                            <div style="font-size: 0.8rem;">Complete Data</div>
+                        <div class="format-option active" data-format="pdf">
+                            <div style="font-size: 1.5rem;">📄</div>
+                            <div>PDF Report</div>
                         </div>
-                        <div class="format-option" data-format="pdf">
-                            <div style="font-weight: bold;">PDF</div>
-                            <div style="font-size: 0.8rem;">Readable Report</div>
+                        <div class="format-option" data-format="json">
+                            <div style="font-size: 1.5rem;">📊</div>
+                            <div>JSON Data</div>
                         </div>
                         <div class="format-option" data-format="csv">
-                            <div style="font-weight: bold;">CSV</div>
-                            <div style="font-size: 0.8rem;">Spreadsheet</div>
+                            <div style="font-size: 1.5rem;">📈</div>
+                            <div>CSV Export</div>
                         </div>
                         <div class="format-option" data-format="html">
-                            <div style="font-weight: bold;">HTML</div>
-                            <div style="font-size: 0.8rem;">Web Format</div>
+                            <div style="font-size: 1.5rem;">🌐</div>
+                            <div>HTML Archive</div>
                         </div>
                     </div>
                     
-                    <div style="margin-top: 20px;">
-                        <label style="font-weight: bold; display: block; margin-bottom: 10px;">Data to Export:</label>
+                    <div style="margin: 15px 0;">
+                        <label style="font-weight: bold; display: block; margin-bottom: 8px;">Content to Export:</label>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                            <label style="display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox" checked> Study Notes
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox" checked> Bookmarks
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox" checked> Reading Progress
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox"> Audio Notes
-                            </label>
+                            <label><input type="checkbox" checked> Study Notes</label>
+                            <label><input type="checkbox" checked> Bookmarks</label>
+                            <label><input type="checkbox"> Audio Notes</label>
+                            <label><input type="checkbox"> Reading Progress</label>
                         </div>
                     </div>
                     
-                    <button class="btn btn-performance" style="width: 100%; margin-top: 20px;" id="exportDataBtn">
-                        📥 Export Data
-                    </button>
+                    <button class="btn btn-performance" style="width: 100%;">Export Now</button>
                 </div>
 
-                <div class="offline-panel">
-                    <h3>📥 Import Data</h3>
-                    <p>Restore from backup or import from other Bible apps</p>
+                <div class="export-import-panel">
+                    <h3>📤 Import Data</h3>
+                    <p>Import data from other Bible apps or previous exports</p>
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                        <div>
-                            <label style="font-weight: bold; display: block; margin-bottom: 8px;">Upload File</label>
-                            <input type="file" class="form-control" accept=".json,.csv,.pdf">
-                        </div>
-                        <div>
-                            <label style="font-weight: bold; display: block; margin-bottom: 8px;">Import From</label>
-                            <select class="form-control">
-                                <option>VerseCurator Backup</option>
-                                <option>YouVersion</option>
-                                <option>Logos Bible</option>
-                                <option>Blue Letter Bible</option>
-                            </select>
-                        </div>
+                    <div style="margin: 15px 0;">
+                        <label style="font-weight: bold; display: block; margin-bottom: 8px;">Source:</label>
+                        <select class="form-control">
+                            <option>YouVersion (Bible App)</option>
+                            <option>Logos Bible Software</option>
+                            <option>Accordance</option>
+                            <option>Previous VerseCurator Export</option>
+                            <option>Custom JSON/CSV</option>
+                        </select>
                     </div>
                     
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 15px;" id="importDataBtn">
-                        📤 Import Data
-                    </button>
+                    <div style="margin: 15px 0;">
+                        <label style="font-weight: bold; display: block; margin-bottom: 8px;">Upload File:</label>
+                        <input type="file" class="form-control">
+                    </div>
+                    
+                    <button class="btn btn-outline" style="width: 100%;">Import Data</button>
                 </div>
             </div>
         </section>
 
-        <!-- Existing other views remain -->
-        <!-- ... -->
+        <!-- STUDY VIEW -->
+        <section id="study-view" class="view-section">
+            <div class="verse-section">
+                <h2>📚 Study Tools</h2>
+                <p>Advanced study features with offline capabilities</p>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="analytics-value">156</div>
+                        <div class="analytics-label">Study Notes</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">42</div>
+                        <div class="analytics-label">Bookmarks</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">18</div>
+                        <div class="analytics-label">Highlights</div>
+                    </div>
+                </div>
 
+                <div class="intelligence-panel">
+                    <h3>Study Resources</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <div class="resource-icon">📖</div>
+                            <div>Bible Reader</div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">🔍</div>
+                            <div>Search</div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">📝</div>
+                            <div>Notes</div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">🎵</div>
+                            <div>Audio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COLLABORATION VIEW -->
+        <section id="collaboration-view" class="view-section">
+            <div class="verse-section">
+                <h2>👥 Collaboration</h2>
+                <p>Work together with others on Bible study</p>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="analytics-value">12</div>
+                        <div class="analytics-label">Groups</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">47</div>
+                        <div class="analytics-label">Shared Notes</div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-value">5</div>
+                        <div class="analytics-label">Active Studies</div>
+                    </div>
+                </div>
+
+                <div class="intelligence-panel">
+                    <h3>Collaboration Tools</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <div class="resource-icon">👥</div>
+                            <div>Groups</div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">💬</div>
+                            <div>Discussions</div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">📊</div>
+                            <div>Shared Notes</div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-icon">🔄</div>
+                            <div>Sync</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE VIEW -->
+        <section id="profile-view" class="view-section">
+            <div class="verse-section">
+                <h2>👤 User Profile</h2>
+                <p>Manage your account and preferences</p>
+                
+                <div class="user-info-card" style="max-width: 400px; margin: 0 auto;">
+                    <div class="user-avatar" style="width: 80px; height: 80px; font-size: 1.5rem;">JD</div>
+                    <div class="username" style="font-size: 1.2rem;">John Doe</div>
+                    <div class="user-stats">
+                        <div>Member since: January 2023</div>
+                        <div>Last active: Today</div>
+                        <div>Account type: Premium</div>
+                    </div>
+                </div>
+
+                <div class="intelligence-panel" style="max-width: 500px; margin: 20px auto;">
+                    <h3>Settings</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div>
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Theme:</label>
+                            <select class="form-control">
+                                <option>Light</option>
+                                <option>Dark</option>
+                                <option>Auto</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Offline Storage:</label>
+                            <select class="form-control">
+                                <option>Auto-download new content</option>
+                                <option>Download on Wi-Fi only</option>
+                                <option>Manual download only</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Sync Frequency:</label>
+                            <select class="form-control">
+                                <option>Real-time</option>
+                                <option>Every 15 minutes</option>
+                                <option>Every hour</option>
+                                <option>Manual only</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;">Save Settings</button>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- MODALS -->
-    <div class="modal" id="storageManagementModal">
+    <div class="modal" id="offlineContentModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>💾 Storage Management</h3>
-                <button class="close-btn" id="closeStorageModal">&times;</button>
+                <h3>📱 Manage Offline Content</h3>
+                <button class="close-btn" data-modal="offlineContentModal">&times;</button>
             </div>
-            <div class="storage-breakdown">
-                <!-- Storage breakdown would go here -->
+            <div>
+                <p>Select content to download for offline use:</p>
+                
+                <div style="margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                        <div>
+                            <strong>Complete Bible (KJV)</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">~50 MB</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                        <div>
+                            <strong>Audio Devotionals</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">~200 MB</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                        <div>
+                            <strong>Study Notes & Highlights</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">~15 MB</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button class="btn btn-offline">Download Selected</button>
+                    <button class="btn btn-outline" data-modal="offlineContentModal">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Existing modals remain -->
-    <!-- ... -->
+    <div class="modal" id="performanceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚡ Performance Optimization</h3>
+                <button class="close-btn" data-modal="performanceModal">&times;</button>
+            </div>
+            <div>
+                <p>Optimize VerseCurator for better performance:</p>
+                
+                <div style="margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                        <div>
+                            <strong>Enable Data Compression</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Reduces data usage by ~40%</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                        <div>
+                            <strong>Lazy Loading</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Load content as needed</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                        <div>
+                            <strong>Smart Caching</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-light);">Optimizes cache usage</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button class="btn btn-performance">Apply Optimizations</button>
+                    <button class="btn btn-outline" data-modal="performanceModal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // PWA Service Worker Registration
+        // Service Worker Registration for PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     })
                     .catch(function(error) {
                         console.log('ServiceWorker registration failed: ', error);
@@ -811,438 +1476,278 @@
             });
         }
 
-        // Enhanced Application State for Phase 3.5
-        const appState = {
-            // Previous state remains
-            currentUser: null,
-            isLoggedIn: false,
-            currentTheme: 'light',
-            currentView: 'home',
-            
-            // New Offline & Performance State
-            offline: {
-                isOnline: navigator.onLine,
-                lastSync: new Date(),
-                pendingSync: [],
-                downloadedContent: {
-                    bible: true,
-                    audio: false,
-                    study: true,
-                    media: false
-                },
-                downloadQueue: [],
-                cacheSize: 87, // MB
-                offlineContentSize: 124 // MB
-            },
-            performance: {
-                loadTime: 1.2,
-                cacheHitRate: 94,
-                memoryUsage: 42,
-                dataCompression: 67,
-                lastOptimization: new Date()
-            },
-            pwa: {
-                isInstalled: false,
-                canInstall: false,
-                installPrompt: null
+        // PWA Install Prompt
+        let deferredPrompt;
+        const pwaInstallPrompt = document.getElementById('pwaInstallPrompt');
+        const installPwaBtn = document.getElementById('installPwaBtn');
+        const dismissPwaBtn = document.getElementById('dismissPwaBtn');
+        const installAppBtn = document.getElementById('installAppBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install prompt
+            setTimeout(() => {
+                pwaInstallPrompt.classList.add('show');
+            }, 3000);
+        });
+
+        installPwaBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    pwaInstallPrompt.classList.remove('show');
+                }
+                deferredPrompt = null;
             }
-        };
+        });
 
-        // Offline & PWA Engine
-        const OfflineEngine = {
-            // Initialize offline capabilities
-            initialize() {
-                this.setupConnectivityMonitoring();
-                this.setupPWAFeatures();
-                this.setupCacheManagement();
-                this.updateOfflineUI();
-                showNotification('📱 Offline features activated', 'success');
-            },
-
-            // Connectivity Monitoring
-            setupConnectivityMonitoring() {
-                window.addEventListener('online', this.handleOnline.bind(this));
-                window.addEventListener('offline', this.handleOffline.bind(this));
-                this.updateConnectionStatus();
-            },
-
-            handleOnline() {
-                appState.offline.isOnline = true;
-                this.updateConnectionStatus();
-                this.syncPendingChanges();
-                showNotification('🌐 Connection restored. Syncing changes...', 'success');
-            },
-
-            handleOffline() {
-                appState.offline.isOnline = false;
-                this.updateConnectionStatus();
-                showNotification('📶 You are now offline', 'info');
-            },
-
-            updateConnectionStatus() {
-                const statusElement = document.getElementById('connectionStatus');
-                const offlineStatus = document.getElementById('offlineStatus');
-                
-                if (statusElement) {
-                    statusElement.textContent = appState.offline.isOnline ? 'Online' : 'Offline';
-                    statusElement.style.background = appState.offline.isOnline ? 
-                        'var(--performance-color)' : 'var(--offline-color)';
+        installAppBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    pwaInstallPrompt.classList.remove('show');
                 }
-                
-                if (offlineStatus) {
-                    if (!appState.offline.isOnline) {
-                        offlineStatus.classList.add('show');
-                    } else {
-                        offlineStatus.classList.remove('show');
-                    }
-                }
-            },
-
-            // PWA Features
-            setupPWAFeatures() {
-                // Listen for beforeinstallprompt event
-                window.addEventListener('beforeinstallprompt', (e) => {
-                    e.preventDefault();
-                    appState.pwa.installPrompt = e;
-                    appState.pwa.canInstall = true;
-                    this.showInstallPrompt();
-                });
-
-                // Check if app is already installed
-                if (window.matchMedia('(display-mode: standalone)').matches) {
-                    appState.pwa.isInstalled = true;
-                }
-
-                window.addEventListener('appinstalled', () => {
-                    appState.pwa.isInstalled = true;
-                    appState.pwa.canInstall = false;
-                    this.hideInstallPrompt();
-                    showNotification('🎉 App installed successfully!', 'success');
-                });
-            },
-
-            showInstallPrompt() {
-                const prompt = document.getElementById('pwaInstallPrompt');
-                if (prompt && appState.pwa.canInstall && !appState.pwa.isInstalled) {
-                    prompt.classList.add('show');
-                }
-            },
-
-            hideInstallPrompt() {
-                const prompt = document.getElementById('pwaInstallPrompt');
-                if (prompt) {
-                    prompt.classList.remove('show');
-                }
-            },
-
-            async installPWA() {
-                if (appState.pwa.installPrompt) {
-                    appState.pwa.installPrompt.prompt();
-                    const { outcome } = await appState.pwa.installPrompt.userChoice;
-                    if (outcome === 'accepted') {
-                        appState.pwa.isInstalled = true;
-                    }
-                    appState.pwa.installPrompt = null;
-                }
-            },
-
-            // Sync Management
-            syncPendingChanges() {
-                if (appState.offline.pendingSync.length > 0) {
-                    showNotification('🔄 Syncing pending changes...', 'info');
-                    // Simulate sync process
-                    setTimeout(() => {
-                        appState.offline.pendingSync = [];
-                        appState.offline.lastSync = new Date();
-                        this.updateSyncUI();
-                        showNotification('✅ Sync completed successfully', 'success');
-                    }, 2000);
-                }
-            },
-
-            updateSyncUI() {
-                const lastSyncElement = document.getElementById('lastSyncTime');
-                if (lastSyncElement) {
-                    lastSyncElement.textContent = 'Just now';
-                }
-            },
-
-            // Download Management
-            startDownload(contentType) {
-                if (!appState.offline.downloadedContent[contentType]) {
-                    appState.offline.downloadQueue.push(contentType);
-                    this.simulateDownload(contentType);
-                    showNotification(`📥 Downloading ${contentType}...`, 'info');
-                }
-            },
-
-            simulateDownload(contentType) {
-                // Simulate download progress
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += 10;
-                    this.updateDownloadProgress(contentType, progress);
-                    
-                    if (progress >= 100) {
-                        clearInterval(interval);
-                        appState.offline.downloadedContent[contentType] = true;
-                        const index = appState.offline.downloadQueue.indexOf(contentType);
-                        if (index > -1) {
-                            appState.offline.downloadQueue.splice(index, 1);
-                        }
-                        showNotification(`✅ ${contentType} downloaded successfully`, 'success');
-                    }
-                }, 300);
-            },
-
-            updateDownloadProgress(contentType, progress) {
-                // Update progress bars in UI
-                const progressElements = document.querySelectorAll('.progress-fill');
-                progressElements.forEach(element => {
-                    // This would be more specific in a real implementation
-                    element.style.width = `${progress}%`;
-                });
-            },
-
-            // Cache Management
-            setupCacheManagement() {
-                this.updateCacheUI();
-            },
-
-            updateCacheUI() {
-                const cacheSizeElement = document.getElementById('cacheSize');
-                const offlineContentElement = document.getElementById('offlineContentSize');
-                
-                if (cacheSizeElement) {
-                    cacheSizeElement.textContent = `${appState.offline.cacheSize} MB`;
-                }
-                if (offlineContentElement) {
-                    offlineContentElement.textContent = `${appState.offline.offlineContentSize} MB`;
-                }
-            },
-
-            clearCache(type = 'all') {
-                let clearedSize = 0;
-                
-                switch(type) {
-                    case 'scripture':
-                        clearedSize = 50;
-                        break;
-                    case 'media':
-                        clearedSize = 25;
-                        break;
-                    case 'all':
-                        clearedSize = appState.offline.cacheSize;
-                        break;
-                }
-                
-                appState.offline.cacheSize -= clearedSize;
-                this.updateCacheUI();
-                showNotification(`🧹 Cleared ${clearedSize}MB of ${type} cache`, 'success');
-            },
-
-            // Export/Import
-            exportData(format = 'json') {
-                const data = {
-                    user: appState.currentUser,
-                    studies: appState.study?.activeStudies || [],
-                    notes: appState.study?.sharedNotes || [],
-                    preferences: {
-                        theme: appState.currentTheme,
-                        offlineContent: appState.offline.downloadedContent
-                    }
-                };
-
-                let blob, filename;
-                
-                switch(format) {
-                    case 'json':
-                        blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-                        filename = `versecurator-backup-${new Date().toISOString().split('T')[0]}.json`;
-                        break;
-                    case 'csv':
-                        // Simplified CSV export
-                        const csv = this.convertToCSV(data);
-                        blob = new Blob([csv], { type: 'text/csv' });
-                        filename = `versecurator-export-${new Date().toISOString().split('T')[0]}.csv`;
-                        break;
-                }
-
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-
-                showNotification(`📤 Data exported as ${format.toUpperCase()}`, 'success');
-            },
-
-            convertToCSV(data) {
-                // Simplified CSV conversion
-                return "Type,Count,LastUpdated\n" +
-                       `Studies,${data.studies.length},${new Date().toISOString()}\n` +
-                       `Notes,${data.notes.length},${new Date().toISOString()}`;
-            },
-
-            // Performance Monitoring
-            updatePerformanceMetrics() {
-                const metrics = [
-                    { id: 'loadTime', value: `${appState.performance.loadTime}s` },
-                    { id: 'cacheHit', value: `${appState.performance.cacheHitRate}%` },
-                    { id: 'memoryUsage', value: `${appState.performance.memoryUsage}MB` },
-                    { id: 'dataSaved', value: `${appState.performance.dataCompression}%` }
-                ];
-
-                metrics.forEach(metric => {
-                    const element = document.getElementById(metric.id);
-                    if (element) {
-                        element.textContent = metric.value;
-                    }
-                });
-            },
-
-            optimizePerformance() {
-                showNotification('⚡ Optimizing performance...', 'info');
-                
-                // Simulate optimization
-                setTimeout(() => {
-                    appState.performance.loadTime = Math.max(0.8, appState.performance.loadTime - 0.2);
-                    appState.performance.cacheHitRate = Math.min(98, appState.performance.cacheHitRate + 2);
-                    appState.performance.dataCompression = Math.min(80, appState.performance.dataCompression + 3);
-                    
-                    this.updatePerformanceMetrics();
-                    showNotification('✅ Performance optimized!', 'success');
-                }, 1500);
+                deferredPrompt = null;
             }
-        };
+        });
 
-        // Enhanced Event Listeners for Phase 3.5
-        function attachOfflineEventListeners() {
-            // PWA Installation
-            document.getElementById('installPwaBtn')?.addEventListener('click', () => {
-                OfflineEngine.installPWA();
-            });
+        dismissPwaBtn.addEventListener('click', () => {
+            pwaInstallPrompt.classList.remove('show');
+        });
 
-            document.getElementById('dismissPwaBtn')?.addEventListener('click', () => {
-                OfflineEngine.hideInstallPrompt();
-            });
+        // Offline/Online Detection
+        const offlineStatus = document.getElementById('offlineStatus');
+        const connectionStatus = document.getElementById('connectionStatus');
 
-            document.getElementById('installAppBtn')?.addEventListener('click', () => {
-                OfflineEngine.installPWA();
-            });
+        window.addEventListener('online', () => {
+            offlineStatus.classList.remove('show');
+            connectionStatus.textContent = 'Online';
+            connectionStatus.style.backgroundColor = 'var(--performance-color)';
+            showNotification('Connection restored. Syncing data...', 'success');
+            
+            // Simulate sync process
+            setTimeout(() => {
+                showNotification('Data synchronized successfully', 'success');
+            }, 2000);
+        });
 
-            // Sync Management
-            document.getElementById('syncNowBtn')?.addEventListener('click', () => {
-                OfflineEngine.syncPendingChanges();
-            });
+        window.addEventListener('offline', () => {
+            offlineStatus.classList.add('show');
+            connectionStatus.textContent = 'Offline';
+            connectionStatus.style.backgroundColor = 'var(--offline-color)';
+            showNotification('You are now offline. Working with cached data.', 'info');
+        });
 
-            document.getElementById('forceSyncBtn')?.addEventListener('click', () => {
-                OfflineEngine.syncPendingChanges();
-            });
+        // View Navigation
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const viewSections = document.querySelectorAll('.view-section');
 
-            // Download Management
-            document.querySelectorAll('[data-download]').forEach(element => {
-                element.addEventListener('click', function() {
-                    const contentType = this.getAttribute('data-download');
-                    OfflineEngine.startDownload(contentType);
-                });
-            });
-
-            document.getElementById('downloadAllBtn')?.addEventListener('click', () => {
-                ['bible', 'audio', 'study', 'media'].forEach(type => {
-                    if (!appState.offline.downloadedContent[type]) {
-                        OfflineEngine.startDownload(type);
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Show corresponding view
+                const viewId = link.getAttribute('data-view') + '-view';
+                viewSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === viewId) {
+                        section.classList.add('active');
                     }
                 });
             });
+        });
 
-            // Cache Management
-            document.getElementById('clearCacheBtn')?.addEventListener('click', () => {
-                OfflineEngine.clearCache('all');
-            });
-
-            document.getElementById('clearScriptureCache')?.addEventListener('click', () => {
-                OfflineEngine.clearCache('scripture');
-            });
-
-            document.getElementById('clearMediaCache')?.addEventListener('click', () => {
-                OfflineEngine.clearCache('media');
-            });
-
-            document.getElementById('clearAllCache')?.addEventListener('click', () => {
-                OfflineEngine.clearCache('all');
-            });
-
-            // Export/Import
-            document.getElementById('exportDataBtn')?.addEventListener('click', () => {
-                const activeFormat = document.querySelector('.format-option.active')?.getAttribute('data-format') || 'json';
-                OfflineEngine.exportData(activeFormat);
-            });
-
-            document.querySelectorAll('.format-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.format-option').forEach(opt => {
-                        opt.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                });
-            });
-
-            // Performance Optimization
-            document.getElementById('performanceBtn')?.addEventListener('click', () => {
-                OfflineEngine.optimizePerformance();
-            });
-
-            document.getElementById('optimizePerformanceBtn')?.addEventListener('click', () => {
-                OfflineEngine.optimizePerformance();
-            });
-
-            // Storage Management
-            document.getElementById('manageStorageBtn')?.addEventListener('click', () => {
-                toggleModal('storageManagementModal');
-            });
-
-            document.getElementById('manageOfflineBtn')?.addEventListener('click', () => {
-                switchView('offline');
-            });
-        }
-
-        // Enhanced App Initialization
-        function initApp() {
-            // Previous initialization
-            initTheme();
-            initAuth();
-            attachEventListeners();
-            
-            // Phase 3.5 Initialization
-            OfflineEngine.initialize();
-            attachOfflineEventListeners();
-            OfflineEngine.updatePerformanceMetrics();
-            
-            showNotification('VerseCurator Phase 3.5 - Offline & Platform Expansion Activated!', 'success');
-            
-            console.log('Phase 3.5 Features:');
-            console.log('✅ Complete offline functionality');
-            console.log('✅ Smart sync when online');
-            console.log('✅ Offline audio downloads');
-            console.log('✅ Local data management');
-            console.log('✅ Progressive Web App (PWA) features');
-            console.log('✅ Mobile-responsive enhancements');
-            console.log('✅ Export/import capabilities');
-            console.log('✅ Performance monitoring');
-            console.log('✅ Cache management');
-            console.log('✅ Scalability improvements');
-        }
-
-        // Start the application
-        document.addEventListener('DOMContentLoaded', initApp);
-
-        // All previous JavaScript functionality remains
-        // ... (all previous JavaScript code)
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
         
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            themeToggle.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+            
+            // Save theme preference
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggle.textContent = '☀️';
+        }
+
+        // Modal Management
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-btn');
+
+        document.getElementById('manageOfflineBtn').addEventListener('click', () => {
+            document.getElementById('offlineContentModal').classList.add('active');
+        });
+
+        document.getElementById('optimizePerformanceBtn').addEventListener('click', () => {
+            document.getElementById('performanceModal').classList.add('active');
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modalId = button.getAttribute('data-modal');
+                document.getElementById(modalId).classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const notificationContainer = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                <span>${message}</span>
+            `;
+            
+            notificationContainer.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Simulate Performance Metrics
+        function updatePerformanceMetrics() {
+            const metrics = [
+                { id: 'loadTime', value: (Math.random() * 0.5 + 0.8).toFixed(1) + 's' },
+                { id: 'cacheHit', value: Math.floor(Math.random() * 10 + 90) + '%' },
+                { id: 'memoryUsage', value: Math.floor(Math.random() * 20 + 35) + 'MB' },
+                { id: 'dataSaved', value: Math.floor(Math.random() * 20 + 60) + '%' }
+            ];
+            
+            metrics.forEach(metric => {
+                const element = document.getElementById(metric.id);
+                if (element) {
+                    element.textContent = metric.value;
+                }
+                
+                // Also update performance view metrics
+                const perfElement = document.getElementById('perf' + metric.id.charAt(0).toUpperCase() + metric.id.slice(1));
+                if (perfElement) {
+                    perfElement.textContent = metric.value;
+                }
+            });
+        }
+
+        // Initialize performance metrics
+        updatePerformanceMetrics();
+        setInterval(updatePerformanceMetrics, 5000);
+
+        // Simulate Download Progress
+        function simulateDownloadProgress() {
+            const progressItems = document.querySelectorAll('.progress-item');
+            progressItems.forEach(item => {
+                const progressFill = item.querySelector('.progress-fill');
+                const percentageText = item.querySelector('span:last-child');
+                
+                if (progressFill.style.width !== '100%') {
+                    let currentWidth = parseInt(progressFill.style.width) || 0;
+                    if (currentWidth < 100) {
+                        currentWidth += Math.floor(Math.random() * 10);
+                        if (currentWidth > 100) currentWidth = 100;
+                        
+                        progressFill.style.width = currentWidth + '%';
+                        percentageText.textContent = currentWidth + '%';
+                        
+                        if (currentWidth === 100) {
+                            showNotification('Download completed!', 'success');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Download buttons
+        document.getElementById('downloadAllBtn').addEventListener('click', () => {
+            showNotification('Starting download of all content...', 'info');
+            setTimeout(simulateDownloadProgress, 1000);
+        });
+
+        document.querySelectorAll('.resource-card[data-download]').forEach(card => {
+            card.addEventListener('click', () => {
+                const type = card.getAttribute('data-download');
+                showNotification(`Starting download of ${type} content...`, 'info');
+                setTimeout(simulateDownloadProgress, 1000);
+            });
+        });
+
+        // Sync button
+        document.getElementById('forceSyncBtn').addEventListener('click', () => {
+            showNotification('Syncing data with server...', 'info');
+            setTimeout(() => {
+                showNotification('Data synchronized successfully', 'success');
+            }, 2000);
+        });
+
+        // Export format selection
+        document.querySelectorAll('.format-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.format-option').forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+                
+                const format = option.getAttribute('data-format');
+                showNotification(`Selected ${format.toUpperCase()} export format`, 'info');
+            });
+        });
+
+        // Clear cache buttons
+        document.getElementById('clearCacheBtn').addEventListener('click', () => {
+            showNotification('Clearing cache...', 'info');
+            setTimeout(() => {
+                showNotification('Cache cleared successfully', 'success');
+                document.getElementById('cacheSize').textContent = '0 MB';
+            }, 1500);
+        });
+
+        document.getElementById('clearCacheBtn2').addEventListener('click', () => {
+            showNotification('Clearing cache...', 'info');
+            setTimeout(() => {
+                showNotification('Cache cleared successfully', 'success');
+                document.getElementById('cacheSize').textContent = '0 MB';
+            }, 1500);
+        });
+
+        // Login button
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            showNotification('Redirecting to login...', 'info');
+        });
+
+        // Initialize with a welcome notification
+        setTimeout(() => {
+            showNotification('Welcome to VerseCurator Phase 3.5! Offline features are now active.', 'success');
+        }, 1000);
     </script>
 </body>
 </html>
